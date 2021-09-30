@@ -58,6 +58,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -126,6 +128,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\SessionHelper.cs" />
+    <Content Include="App_Code\UserSession.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -136,8 +140,31 @@
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserEmployeeModel.cs" />
+    <Compile Include="Models\UserEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User_Employee.cs">
+      <DependentUpon>UserEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User_Recruiter.cs">
+      <DependentUpon>UserEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1871,6 +1898,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\UserEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserEntities.edmx</DependentUpon>
+      <LastGenOutput>UserEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\UserEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserEntities.edmx</DependentUpon>
+      <LastGenOutput>UserEntities.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -2052,6 +2089,13 @@
     <Content Include="Areas\Admin\Views\Shared\_SideBar.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Footer.cshtml" />
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
+    <EntityDeploy Include="Models\UserEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UserEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\UserEntities.edmx.diagram">
+      <DependentUpon>UserEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2080,10 +2124,11 @@
     <Content Include="Views\Shared\_OurLayout.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2106,6 +2151,9 @@
       <Project>{ce8fbfca-f247-4e3b-ab8f-247fb1362ca0}</Project>
       <Name>Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
